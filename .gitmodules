@@ -1,3 +1,6 @@
+[submodule "framework/java/spring-game"]
+	path = framework/java/spring-game
+	url = git@github.com:deepinthinking/doodle-spring-game.git
 [submodule "specification"]
 	path = specification
 	url = git@github.com:deepinthinking/doodle-specification.git

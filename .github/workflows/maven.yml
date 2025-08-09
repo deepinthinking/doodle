@@ -1,0 +1,33 @@
+name: Maven Build
+
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: 'recursive'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven'
+
+      - name: Checkout ginga-spring-infra
+        uses: actions/checkout@v4
+        with:
+          repository: deepinthinking/ginga-spring-infra
+          path: deepinthinking/ginga-spring-infra
+
+      - name: Install ginga-spring-infra
+        run: cd deepinthinking/ginga-spring-infra && ./mvnw install
+
+      - name: Build doodle-spring-game
+        run: cd framework/java/spring-game && ./mvnw package -B
+
